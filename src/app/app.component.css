@@ -1,0 +1,10 @@
+.layout{
+  background-color: #17212f;
+  min-height: 100vh;
+}
+.title{
+  font-size: 1.5rem;
+}
+.reddit-logo{
+  height: 65px;
+}
