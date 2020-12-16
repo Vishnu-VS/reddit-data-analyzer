@@ -13,3 +13,12 @@
   padding-left: 5rem;
   padding-right: 5rem;
 }
+
+:host ::ng-deep p-toolbar .p-toolbar {
+  border-bottom: 1px solid #304562;
+  border-radius: 0;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+}
+
