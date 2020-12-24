@@ -13,6 +13,7 @@ import {ButtonModule} from 'primeng/button';
 import {InputTextModule} from 'primeng/inputtext';
 import {ChipsModule} from 'primeng/chips';
 import {SliderModule} from 'primeng/slider';
+import {ScrollPanelModule} from 'primeng/scrollpanel';
 
 
 import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
@@ -36,7 +37,8 @@ import { SearchComponent } from './search/search.component';
     ButtonModule,
     InputTextModule,
     ChipsModule,
-    SliderModule
+    SliderModule,
+    ScrollPanelModule
   ],
   providers: [
     {
