@@ -22,6 +22,12 @@ export class SearchComponent implements OnInit {
   selectedEndpoint: Endpoint;
 
   rawResponse: any;
+  q:string;
+  subreddits: any;
+  subredditsFormatted: string = "";
+  showSubredditTextBox = false;
+  code: any;
+  languages: string[] = ["json"];
 
   constructor(private http: HttpClient) {
     this.endpoints = [
@@ -29,20 +35,50 @@ export class SearchComponent implements OnInit {
       {name: 'Submission', urlSegment: 'submission'},
       {name: 'Subreddit', urlSegment: 'subreddit'}
     ];
-    var options = {
-      params: {
-        subreddit: 'news',
-        q: 'phone'
-      },
-    }
-    this.http.get("https://api.pushshift.io/reddit/comment/search", options).subscribe(res => {
-      console.log(res);
-      this.rawResponse = JSON.stringify(res);
-    });
+
   }
 
   ngOnInit(): void {
+    this.selectedEndpoint = this.endpoints[0];
+  }
 
+  endpointChange(event: any){
+    console.log(event);
+    if(event.value.name == "Subreddit"){
+      this.showSubredditTextBox = true;
+    }
+  }
+
+  onHighlight(event){
+    console.log(event);
+  }
+
+  submit(event: any){
+    console.log(event);
+    console.log(this.subreddits);
+    this.subredditsFormatted = "";
+    if(this.subreddits){
+      for(let i=0; i<this.subreddits.length; i++){
+        if(this.subredditsFormatted == ""){
+          this.subredditsFormatted = this.subreddits[i];
+        }
+        else{
+          this.subredditsFormatted = this.subredditsFormatted + "," + this.subreddits[i];
+        }
+      }
+      console.log(this.subredditsFormatted);
+      var options = {
+        params: {
+          subreddit: this.subredditsFormatted,
+          q: this.q
+        },
+      }
+    }
+    this.http.get("https://api.pushshift.io/reddit/"+this.selectedEndpoint.urlSegment+"/search", options).subscribe(res => {
+      console.log(res);
+      this.rawResponse = res;
+      this.code = JSON.stringify(this.rawResponse, null, 2);
+    });
   }
 
 }

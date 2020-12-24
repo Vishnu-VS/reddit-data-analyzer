@@ -1,7 +1,14 @@
-code{
+pre{
+  white-space: pre-wrap;
   word-break: break-word;
 }
 
 .code-block{
   padding-top: 50px;
+}
+
+.form-item{
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }

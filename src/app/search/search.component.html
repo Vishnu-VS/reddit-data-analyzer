@@ -3,10 +3,29 @@
     <h2>Search Reddit</h2>
   </div>
   <h5>Choose Endpoint</h5>
-  <p-dropdown [options]="endpoints" [(ngModel)]="selectedEndpoint" optionLabel="name"></p-dropdown>
+  <div class="form-item">
+    <p-dropdown [options]="endpoints" [(ngModel)]="selectedEndpoint" optionLabel="name" (onChange)="endpointChange($event)"></p-dropdown>
+  </div>
+  <div class="form-item">
+    <h5>Subreddit(Comma Separator)</h5>
+    <p-chips [(ngModel)]="subreddits" separator=","></p-chips>
+  </div>
+  <div class="form-item">
+    <h5>Search Term</h5>
+    <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input type="text" pInputText placeholder="Search" [(ngModel)]="q" />
+    </span>
+  </div>
+  <div class="form-item">
+    <p-button label="Submit" (onClick)="submit($event)"></p-button>
+  </div>
+
 </div>
-<div class="code-block">
-  <code>{{rawResponse}}</code>
+<div class="code-block" *ngIf="code">
+  <pre>
+    <code [highlight]="code" [languages]="languages" (highlighted)="onHighlight($event)"></code>
+  </pre>
 </div>
 
 
