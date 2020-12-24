@@ -1,4 +1,4 @@
-<div class="p-input-filled">
+<div>
   <div>
     <h2>Search Reddit</h2>
   </div>
@@ -7,8 +7,8 @@
     <p-dropdown [options]="endpoints" [(ngModel)]="selectedEndpoint" optionLabel="name" (onChange)="endpointChange($event)"></p-dropdown>
   </div>
   <div class="form-item">
-    <h5>Subreddit(Comma Separator)</h5>
-    <p-chips [(ngModel)]="subreddits" separator=","></p-chips>
+    <h5>Subreddit(Comma Separated)</h5>
+    <p-chips [(ngModel)]="subreddits" addOnBlur="true" separator="," (onBlur)="subredditOutOfFocus($event)"></p-chips>
   </div>
   <div class="form-item">
     <h5>Search Term</h5>
@@ -17,6 +17,11 @@
         <input type="text" pInputText placeholder="Search" [(ngModel)]="q" />
     </span>
   </div>
+  <div class="form-item">
+    <h5>Number of results: {{size}}</h5>
+    <p-slider [(ngModel)]="size"></p-slider>
+  </div>
+
   <div class="form-item">
     <p-button label="Submit" (onClick)="submit($event)"></p-button>
   </div>

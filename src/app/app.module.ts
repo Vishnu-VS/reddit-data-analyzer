@@ -12,6 +12,8 @@ import {DropdownModule} from 'primeng/dropdown';
 import {ButtonModule} from 'primeng/button';
 import {InputTextModule} from 'primeng/inputtext';
 import {ChipsModule} from 'primeng/chips';
+import {SliderModule} from 'primeng/slider';
+
 
 import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 
@@ -33,7 +35,8 @@ import { SearchComponent } from './search/search.component';
     HighlightModule,
     ButtonModule,
     InputTextModule,
-    ChipsModule
+    ChipsModule,
+    SliderModule
   ],
   providers: [
     {

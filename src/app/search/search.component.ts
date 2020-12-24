@@ -27,6 +27,7 @@ export class SearchComponent implements OnInit {
   subredditsFormatted: string = "";
   showSubredditTextBox = false;
   code: any;
+  size: number = 25;
   languages: string[] = ["json"];
 
   constructor(private http: HttpClient) {
@@ -53,9 +54,14 @@ export class SearchComponent implements OnInit {
     console.log(event);
   }
 
+  subredditOutOfFocus(e){
+    console.log(e);
+  }
+
   submit(event: any){
     console.log(event);
     console.log(this.subreddits);
+    var options;
     this.subredditsFormatted = "";
     if(this.subreddits){
       for(let i=0; i<this.subreddits.length; i++){
@@ -67,10 +73,19 @@ export class SearchComponent implements OnInit {
         }
       }
       console.log(this.subredditsFormatted);
-      var options = {
+      options = {
         params: {
           subreddit: this.subredditsFormatted,
-          q: this.q
+          q: this.q,
+          size: this.size
+        },
+      }
+    }
+    else{
+      options = {
+        params: {
+          q: this.q,
+          size: this.size
         },
       }
     }
