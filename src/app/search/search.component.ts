@@ -1,39 +1,24 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-
-
-interface Endpoint {
-  name: string,
-  urlSegment: string
-}
-
-interface Filter {
-  name: string,
-  code: string
-}
-
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Endpoint } from './endpoint';
+import {Filter} from './filter';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css']
+  styleUrls: ['./search.component.css'],
 })
-
-
 export class SearchComponent implements OnInit {
-
   endpoints: Endpoint[];
-
   selectedEndpoint: Endpoint;
-
   rawResponse: any;
-  q:string;
+  q: string;
   subreddits: any;
-  subredditsFormatted: string = "";
+  subredditsFormatted: string = '';
   showSubredditTextBox = false;
   code: any;
   size: number = 25;
-  languages: string[] = ["json"];
+  languages: string[] = ['json'];
   filters: Filter[];
   selectedFilters: Filter[];
   beforeFilter: Date;
@@ -41,77 +26,84 @@ export class SearchComponent implements OnInit {
   showBefore = false;
   showAfter = false;
 
-  constructor(private http: HttpClient, private changeDetectorRef: ChangeDetectorRef) {
+  constructor(
+    private http: HttpClient
+  ) {
     this.endpoints = [
-      {name: 'Comments',urlSegment: 'comment'},
-      {name: 'Submission', urlSegment: 'submission'},
-      {name: 'Subreddit', urlSegment: 'subreddit'}
+      { name: 'Comments', urlSegment: 'comment' },
+      { name: 'Submission', urlSegment: 'submission' },
+      { name: 'Subreddit', urlSegment: 'subreddit' },
     ];
   }
 
   ngOnInit(): void {
-    this.filters = [{
-      name: "Before",
-      code: "before"
-    },
-    {
-      name: "After",
-      code: "after"
-    }];
+    this.filters = [
+      {
+        name: 'Before',
+        code: 'before',
+      },
+      {
+        name: 'After',
+        code: 'after',
+      },
+    ];
     this.selectedEndpoint = this.endpoints[0];
   }
 
-  endpointChange(event: any){
+  endpointChange(event: any) {
     // console.log(event);
-    if(event.value.name == "Subreddit"){
+    if (event.value.name == 'Subreddit') {
       this.showSubredditTextBox = true;
     }
   }
 
-  onHighlight(event){
+  onHighlight(event) {
     // console.log(event);
   }
 
-  subredditOutOfFocus(e){
+  subredditOutOfFocus(e) {
     // console.log(e);
   }
 
-  filterDropdownChange(e){
+  filterDropdownChange(e) {
     // console.log(e);
     // console.log(this.selectedFilters);
-    if(this.selectedFilters.length > 0){
-      for(let i=0; i<this.selectedFilters.length; i++){
-        switch (this.selectedFilters[i].code){
+    if (this.selectedFilters.length > 0) {
+      for (let i = 0; i < this.selectedFilters.length; i++) {
+        switch (this.selectedFilters[i].code) {
           case 'before':
-            this.showBefore=true;
+            this.showBefore = true;
             break;
           case 'after':
-            this.showAfter=true;
+            this.showAfter = true;
             break;
         }
       }
-    }
-    else{
+    } else {
       this.showBefore = this.showAfter = false;
     }
   }
 
-  submit(event: any){
+  submit(event: any) {
     // console.log(event);
     // console.log(this.subreddits);
-    console.log("Before");
-    console.log(this.beforeFilter.getTime());
-    console.log("After");
-    console.log(this.afterFilter.getTime());
+    if(this.beforeFilter){
+      console.log('Before');
+      console.log(this.beforeFilter.getTime());
+    }
+    else if(this.afterFilter){
+      console.log('After');
+      console.log(this.afterFilter.getTime());
+    }
     var options;
-    this.subredditsFormatted = "";
-    if(this.subreddits){
-      for(let i=0; i<this.subreddits.length; i++){
-        if(this.subredditsFormatted == ""){
+    this.subredditsFormatted = '';
+    if (this.subreddits) {
+      for (let i = 0; i < this.subreddits.length; i++) {
+        if (this.subredditsFormatted == '') {
           this.subredditsFormatted = this.subreddits[i];
-        }
-        else{
-          this.subredditsFormatted = this.subredditsFormatted + "," + this.subreddits[i];
+        } else {
+          this.subredditsFormatted =
+            this.subredditsFormatted + ',' + this.subreddits[i];
         }
       }
       // console.log(this.subredditsFormatted);
@@ -119,23 +111,28 @@ export class SearchComponent implements OnInit {
         params: {
           subreddit: this.subredditsFormatted,
           q: this.q,
-          size: this.size
+          size: this.size,
         },
-      }
-    }
-    else{
+      };
+    } else {
       options = {
         params: {
           q: this.q,
-          size: this.size
+          size: this.size,
         },
-      }
+      };
     }
-    this.http.get("https://api.pushshift.io/reddit/"+this.selectedEndpoint.urlSegment+"/search", options).subscribe(res => {
-      // console.log(res);
-      this.rawResponse = res;
-      this.code = JSON.stringify(this.rawResponse, null, 2);
-    });
+    this.http
+      .get(
+        'https://api.pushshift.io/reddit/' +
+          this.selectedEndpoint.urlSegment +
+          '/search',
+        options
+      )
+      .subscribe((res) => {
+        // console.log(res);
+        this.rawResponse = res;
+        this.code = JSON.stringify(this.rawResponse, null, 2);
+      });
   }
-
 }

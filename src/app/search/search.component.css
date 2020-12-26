@@ -48,3 +48,7 @@ pre {
 :host ::ng-deep .multiselect-custom .country-placeholder {
   padding: 0.25rem;
 }
+.start-padding-top{
+  padding-top: 20px;
+  padding-bottom: 20px;
+}

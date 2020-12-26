@@ -3,25 +3,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
-import {ToolbarModule} from 'primeng/toolbar';
-import {DropdownModule} from 'primeng/dropdown';
-import {ButtonModule} from 'primeng/button';
-import {InputTextModule} from 'primeng/inputtext';
-import {ChipsModule} from 'primeng/chips';
-import {SliderModule} from 'primeng/slider';
-import {ScrollPanelModule} from 'primeng/scrollpanel';
-import {MultiSelectModule} from 'primeng/multiselect';
-import {SelectButtonModule} from 'primeng/selectbutton';
-import {CalendarModule} from 'primeng/calendar';
-
-
 import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
-
 import { SearchComponent } from './search/search.component';
+import { PrimeNGModule } from './prime-ng/prime-ng.module';
 
 @NgModule({
   declarations: [
@@ -32,19 +18,11 @@ import { SearchComponent } from './search/search.component';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    ToolbarModule,
-    DropdownModule,
+    PrimeNGModule,
     FormsModule,
     HttpClientModule,
     HighlightModule,
-    ButtonModule,
-    InputTextModule,
-    ChipsModule,
-    SliderModule,
-    ScrollPanelModule,
-    MultiSelectModule,
-    SelectButtonModule,
-    CalendarModule
+
   ],
   providers: [
     {

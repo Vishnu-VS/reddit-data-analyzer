@@ -1,67 +1,74 @@
 <div style="padding-bottom: 50px;">
-  <div style="padding-bottom: 50px;">
-    <h2>Search Reddit</h2>
+  <div class="start-padding-top">
+    <p-card header="Search Reddit">
+      <div class="p-fluid">
+        <div class="form-item p-field p-grid">
+          <span class="p-float-label">
+            <p-dropdown id="endPoint" [options]="endpoints" [(ngModel)]="selectedEndpoint" optionLabel="name" (onChange)="endpointChange($event)"></p-dropdown>
+            <label for="endPoint">Choose Endpoint</label>
+          </span>
+        </div>
+        <div class="form-item p-field p-grid">
+          <span class="p-float-label">
+            <p-chips aria-describedby="subreddit-help" id="subreddits" [(ngModel)]="subreddits" addOnBlur="true" separator="," (onBlur)="subredditOutOfFocus($event)"></p-chips>
+            <label for="subreddits">Subreddit</label>
+          </span>
+          <small id="subreddit-help">Use commas to enter more than one subreddit.</small>
+        </div>
+        <div class="form-item p-field p-grid">
+            <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input id="searchTerms" type="text" pInputText [(ngModel)]="q" placeholder="Search Query"/>
+            </span>
+        </div>
+        <div class="form-item p-grid">
+          <h5>Number of results: {{size}}</h5>
+          <p-slider [(ngModel)]="size"></p-slider>
+        </div>
+      </div>
+    </p-card>
   </div>
-  <div class="p-fluid">
-    <div class="form-item p-field p-grid">
-      <span class="p-float-label">
-        <p-dropdown id="endPoint" [options]="endpoints" [(ngModel)]="selectedEndpoint" optionLabel="name" (onChange)="endpointChange($event)"></p-dropdown>
-        <label for="endPoint">Choose Endpoint</label>
-      </span>
-    </div>
-    <div class="form-item p-field p-grid">
-      <span class="p-float-label">
-        <p-chips aria-describedby="subreddit-help" id="subreddits" [(ngModel)]="subreddits" addOnBlur="true" separator="," (onBlur)="subredditOutOfFocus($event)"></p-chips>
-        <label for="subreddits">Subreddit</label>
+  <div style="margin-bottom: 20px;">
+    <p-card header="More Filters">
+      <div class="p-fluid">
+        <div class="form-item p-grid">
+          <p-multiSelect [options]="filters" [(ngModel)]="selectedFilters" defaultLabel="Select Filters" optionLabel="name" (onChange)="filterDropdownChange($event)" class="multiselect-custom">
+            <ng-template let-value pTemplate="selectedItems">
+              <div class="country-item country-item-value" *ngFor="let option of selectedFilters">
+                  <div>{{option.name}}</div>
+              </div>
+              <div *ngIf="!selectedFilters || selectedFilters.length === 0" class="country-placeholder">
+                  Select Filters
+              </div>
+            </ng-template>
+            <ng-template let-filter pTemplate="item">
+                <div class="country-item">
+                    <div>{{filter.name}}</div>
+                </div>
+            </ng-template>
+          </p-multiSelect>
+        </div>
 
-      </span>
-      <small id="subreddit-help">Use commas to enter more than one subreddit.</small>
-    </div>
-    <div class="form-item p-field p-grid">
-        <span class="p-input-icon-left">
-            <i class="pi pi-search"></i>
-            <input id="searchTerms" type="text" pInputText [(ngModel)]="q" placeholder="Search Query"/>
-        </span>
-    </div>
-
-    <div class="form-item p-grid">
-      <h5>Number of results: {{size}}</h5>
-      <p-slider [(ngModel)]="size"></p-slider>
-    </div>
-
-    <div class="form-item p-grid">
-      <h5>More Filters</h5>
-      <p-multiSelect [options]="filters" [(ngModel)]="selectedFilters" defaultLabel="Select Filters" optionLabel="name" (onChange)="filterDropdownChange($event)" class="multiselect-custom">
-        <ng-template let-value pTemplate="selectedItems">
-          <div class="country-item country-item-value" *ngFor="let option of selectedFilters">
-              <div>{{option.name}}</div>
+        <div *ngIf="selectedFilters">
+          <div *ngIf="showAfter" class="form-item p-grid">
+            <span class="p-float-label">
+              <p-calendar [(ngModel)]="afterFilter" [showTime]="true" inputId="after" dateFormat="dd.M.yy"></p-calendar>
+              <label for="after">After</label>
+            </span>
           </div>
-          <div *ngIf="!selectedFilters || selectedFilters.length === 0" class="country-placeholder">
-              Select Filters
+          <div *ngIf="showBefore" class="form-item p-grid">
+            <span class="p-float-label">
+              <p-calendar [(ngModel)]="beforeFilter" [showTime]="true" inputId="before" dateFormat="dd.M.yy"></p-calendar>
+              <label for="before">Before</label>
+            </span>
           </div>
-        </ng-template>
-        <ng-template let-filter pTemplate="item">
-            <div class="country-item">
-                <div>{{filter.name}}</div>
-            </div>
-        </ng-template>
-      </p-multiSelect>
-    </div>
+        </div>
 
-    <div *ngIf="selectedFilters">
-      <div *ngIf="showAfter" class="form-item p-grid">
-        <label for="after">After</label>
-        <p-calendar [(ngModel)]="afterFilter" [showTime]="true" inputId="after"></p-calendar>
+        <div class="form-item p-grid">
+          <p-button label="Submit" (onClick)="submit($event)"></p-button>
+        </div>
       </div>
-      <div *ngIf="showBefore" class="form-item p-grid">
-        <label for="before">Before</label>
-        <p-calendar [(ngModel)]="beforeFilter" [showTime]="true" inputId="before"></p-calendar>
-      </div>
-    </div>
-
-    <div class="form-item p-grid">
-      <p-button label="Submit" (onClick)="submit($event)"></p-button>
-    </div>
+    </p-card>
   </div>
   <p-scrollPanel [style]="{width: '100%', height: '500px'}" *ngIf="code" styleClass="custombar1">
     <pre>
