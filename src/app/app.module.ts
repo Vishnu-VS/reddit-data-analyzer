@@ -16,6 +16,7 @@ import {SliderModule} from 'primeng/slider';
 import {ScrollPanelModule} from 'primeng/scrollpanel';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {SelectButtonModule} from 'primeng/selectbutton';
+import {CalendarModule} from 'primeng/calendar';
 
 
 import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
@@ -42,7 +43,8 @@ import { SearchComponent } from './search/search.component';
     SliderModule,
     ScrollPanelModule,
     MultiSelectModule,
-    SelectButtonModule
+    SelectButtonModule,
+    CalendarModule
   ],
   providers: [
     {

@@ -11,6 +11,15 @@ pre {
   margin-bottom: 50px;
 }
 
+:host ::ng-deep p-scrollpanel .p-scrollpanel.custombar1 .p-scrollpanel-bar {
+  background-color: var(--primary-color);
+  opacity: 1;
+  transition: background-color .2s;
+}
+:host ::ng-deep p-scrollpanel .p-scrollpanel.custombar1 .p-scrollpanel-bar:hover{
+  background-color: #007ad9;
+}
+
 .form-item {
   display: block;
   margin-top: 10px;

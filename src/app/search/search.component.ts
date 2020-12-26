@@ -36,6 +36,10 @@ export class SearchComponent implements OnInit {
   languages: string[] = ["json"];
   filters: Filter[];
   selectedFilters: Filter[];
+  beforeFilter: Date;
+  afterFilter: Date;
+  showBefore = false;
+  showAfter = false;
 
   constructor(private http: HttpClient, private changeDetectorRef: ChangeDetectorRef) {
     this.endpoints = [
@@ -73,12 +77,32 @@ export class SearchComponent implements OnInit {
   }
 
   filterDropdownChange(e){
-    console.log(e);
+    // console.log(e);
+    // console.log(this.selectedFilters);
+    if(this.selectedFilters.length > 0){
+      for(let i=0; i<this.selectedFilters.length; i++){
+        switch (this.selectedFilters[i].code){
+          case 'before':
+            this.showBefore=true;
+            break;
+          case 'after':
+            this.showAfter=true;
+            break;
+        }
+      }
+    }
+    else{
+      this.showBefore = this.showAfter = false;
+    }
   }
 
   submit(event: any){
     // console.log(event);
     // console.log(this.subreddits);
+    console.log("Before");
+    console.log(this.beforeFilter.getTime());
+    console.log("After");
+    console.log(this.afterFilter.getTime());
     var options;
     this.subredditsFormatted = "";
     if(this.subreddits){

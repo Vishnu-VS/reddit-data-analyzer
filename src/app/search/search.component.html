@@ -48,11 +48,22 @@
       </p-multiSelect>
     </div>
 
+    <div *ngIf="selectedFilters">
+      <div *ngIf="showAfter" class="form-item p-grid">
+        <label for="after">After</label>
+        <p-calendar [(ngModel)]="afterFilter" [showTime]="true" inputId="after"></p-calendar>
+      </div>
+      <div *ngIf="showBefore" class="form-item p-grid">
+        <label for="before">Before</label>
+        <p-calendar [(ngModel)]="beforeFilter" [showTime]="true" inputId="before"></p-calendar>
+      </div>
+    </div>
+
     <div class="form-item p-grid">
       <p-button label="Submit" (onClick)="submit($event)"></p-button>
     </div>
   </div>
-  <p-scrollPanel [style]="{width: '100%', height: '500px'}" *ngIf="code">
+  <p-scrollPanel [style]="{width: '100%', height: '500px'}" *ngIf="code" styleClass="custombar1">
     <pre>
       <code [highlight]="code" [languages]="languages" (highlighted)="onHighlight($event)"></code>
     </pre>

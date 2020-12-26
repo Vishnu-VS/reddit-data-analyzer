@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
-import {DOCUMENT} from '@angular/common';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
   }
 
   switchTheme(e){
-    console.log(e);
+    // console.log(e);
     if(e.value == "light"){
       this.document.getElementById('theme').setAttribute('href', 'assets/themes/saga-blue/theme.css');
     }
