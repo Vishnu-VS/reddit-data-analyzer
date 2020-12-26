@@ -30,6 +30,25 @@
     </div>
 
     <div class="form-item p-grid">
+      <h5>More Filters</h5>
+      <p-multiSelect [options]="filters" [(ngModel)]="selectedFilters" defaultLabel="Select Filters" optionLabel="name" (onChange)="filterDropdownChange($event)" class="multiselect-custom">
+        <ng-template let-value pTemplate="selectedItems">
+          <div class="country-item country-item-value" *ngFor="let option of selectedFilters">
+              <div>{{option.name}}</div>
+          </div>
+          <div *ngIf="!selectedFilters || selectedFilters.length === 0" class="country-placeholder">
+              Select Filters
+          </div>
+        </ng-template>
+        <ng-template let-filter pTemplate="item">
+            <div class="country-item">
+                <div>{{filter.name}}</div>
+            </div>
+        </ng-template>
+      </p-multiSelect>
+    </div>
+
+    <div class="form-item p-grid">
       <p-button label="Submit" (onClick)="submit($event)"></p-button>
     </div>
   </div>

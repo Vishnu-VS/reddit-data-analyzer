@@ -1,5 +1,5 @@
 .layout{
-  background-color: #17212f;
+  background-color: var(--surface-b);
   min-height: 100vh;
 }
 .title{
@@ -15,7 +15,7 @@
 }
 
 :host ::ng-deep p-toolbar .p-toolbar {
-  border-bottom: 1px solid #304562;
+  border-bottom: 1px solid var(--surface-d);
   border-radius: 0;
   border-top: 0;
   border-left: 0;

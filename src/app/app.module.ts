@@ -14,6 +14,8 @@ import {InputTextModule} from 'primeng/inputtext';
 import {ChipsModule} from 'primeng/chips';
 import {SliderModule} from 'primeng/slider';
 import {ScrollPanelModule} from 'primeng/scrollpanel';
+import {MultiSelectModule} from 'primeng/multiselect';
+import {SelectButtonModule} from 'primeng/selectbutton';
 
 
 import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
@@ -38,7 +40,9 @@ import { SearchComponent } from './search/search.component';
     InputTextModule,
     ChipsModule,
     SliderModule,
-    ScrollPanelModule
+    ScrollPanelModule,
+    MultiSelectModule,
+    SelectButtonModule
   ],
   providers: [
     {

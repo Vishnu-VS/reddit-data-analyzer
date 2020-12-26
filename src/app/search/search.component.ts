@@ -1,10 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 
 interface Endpoint {
   name: string,
   urlSegment: string
+}
+
+interface Filter {
+  name: string,
+  code: string
 }
 
 
@@ -29,38 +34,51 @@ export class SearchComponent implements OnInit {
   code: any;
   size: number = 25;
   languages: string[] = ["json"];
+  filters: Filter[];
+  selectedFilters: Filter[];
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private changeDetectorRef: ChangeDetectorRef) {
     this.endpoints = [
       {name: 'Comments',urlSegment: 'comment'},
       {name: 'Submission', urlSegment: 'submission'},
       {name: 'Subreddit', urlSegment: 'subreddit'}
     ];
-
   }
 
   ngOnInit(): void {
+    this.filters = [{
+      name: "Before",
+      code: "before"
+    },
+    {
+      name: "After",
+      code: "after"
+    }];
     this.selectedEndpoint = this.endpoints[0];
   }
 
   endpointChange(event: any){
-    console.log(event);
+    // console.log(event);
     if(event.value.name == "Subreddit"){
       this.showSubredditTextBox = true;
     }
   }
 
   onHighlight(event){
-    console.log(event);
+    // console.log(event);
   }
 
   subredditOutOfFocus(e){
+    // console.log(e);
+  }
+
+  filterDropdownChange(e){
     console.log(e);
   }
 
   submit(event: any){
-    console.log(event);
-    console.log(this.subreddits);
+    // console.log(event);
+    // console.log(this.subreddits);
     var options;
     this.subredditsFormatted = "";
     if(this.subreddits){
@@ -72,7 +90,7 @@ export class SearchComponent implements OnInit {
           this.subredditsFormatted = this.subredditsFormatted + "," + this.subreddits[i];
         }
       }
-      console.log(this.subredditsFormatted);
+      // console.log(this.subredditsFormatted);
       options = {
         params: {
           subreddit: this.subredditsFormatted,
@@ -90,7 +108,7 @@ export class SearchComponent implements OnInit {
       }
     }
     this.http.get("https://api.pushshift.io/reddit/"+this.selectedEndpoint.urlSegment+"/search", options).subscribe(res => {
-      console.log(res);
+      // console.log(res);
       this.rawResponse = res;
       this.code = JSON.stringify(this.rawResponse, null, 2);
     });

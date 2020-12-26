@@ -1,18 +1,41 @@
-pre{
+pre {
   white-space: pre-wrap;
   word-break: break-word;
 }
 
-.code-block{
+.code-block {
   padding-top: 50px;
 }
 
-.p-scrollpanel{
+.p-scrollpanel {
   margin-bottom: 50px;
 }
 
-.form-item{
+.form-item {
   display: block;
   margin-top: 10px;
   margin-bottom: 20px;
+}
+
+:host ::ng-deep .p-multiselect {
+  min-width: 15rem;
+}
+
+:host ::ng-deep .multiselect-custom .p-multiselect-label {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+:host ::ng-deep .multiselect-custom .country-item-value {
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  display: inline-flex;
+  margin-right: 0.5rem;
+  background-color: var(--primary-color);
+  color: var(--primary-color-text);
+}
+:host ::ng-deep .multiselect-custom .country-item-value img.flag {
+  width: 17px;
+}
+:host ::ng-deep .multiselect-custom .country-placeholder {
+  padding: 0.25rem;
 }
