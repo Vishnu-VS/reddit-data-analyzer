@@ -91,7 +91,7 @@ export class SearchComponent implements OnInit {
   submit(event: any) {
     // console.log(event);
     // console.log(this.subreddits);
-    console.log(this.queryParameters);
+    // console.log(this.queryParameters);
     var options;
     this.subredditsFormatted = '';
     if (this.subreddits) {
@@ -117,12 +117,12 @@ export class SearchComponent implements OnInit {
     this.queryParameters.size = this.size;
     // console.log(options);
     if(this.beforeFilter){
-      console.log('Before');
+      // console.log('Before');
       console.log(Math.round(this.beforeFilter.getTime()/1000));
       this.queryParameters.before=Math.round(this.beforeFilter.getTime()/1000);
     }
     if(this.afterFilter){
-      console.log('After');
+      // console.log('After');
       console.log(Math.round(this.afterFilter.getTime()/1000));
       this.queryParameters.after=Math.round(this.afterFilter.getTime()/1000);
     }
@@ -137,6 +137,18 @@ export class SearchComponent implements OnInit {
         // console.log(res);
         this.rawResponse = res;
         this.code = JSON.stringify(this.rawResponse, null, 2);
+      });
+      this.http
+      .get(
+        'https://api.pushshift.io/reddit/' +
+          this.selectedEndpoint.urlSegment +
+          '/search',
+        {params: this.queryParameters, observe: 'response'}
+      )
+      .subscribe((res) => {
+        console.log(res);
+        // this.rawResponse = res;
+        // this.code = JSON.stringify(this.rawResponse, null, 2);
       });
   }
 }
