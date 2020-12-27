@@ -25,6 +25,7 @@ export class SearchComponent implements OnInit {
   afterFilter: Date;
   showBefore = false;
   showAfter = false;
+  queryParameters: any = {};
 
   constructor(
     private http: HttpClient
@@ -67,8 +68,10 @@ export class SearchComponent implements OnInit {
 
   filterDropdownChange(e) {
     // console.log(e);
-    // console.log(this.selectedFilters);
+    console.log(this.selectedFilters);
     if (this.selectedFilters.length > 0) {
+      this.showBefore = false;
+      this.showAfter = false;
       for (let i = 0; i < this.selectedFilters.length; i++) {
         switch (this.selectedFilters[i].code) {
           case 'before':
@@ -81,20 +84,14 @@ export class SearchComponent implements OnInit {
       }
     } else {
       this.showBefore = this.showAfter = false;
+      this.beforeFilter = this.afterFilter = null;
     }
   }
 
   submit(event: any) {
     // console.log(event);
     // console.log(this.subreddits);
-    if(this.beforeFilter){
-      console.log('Before');
-      console.log(this.beforeFilter.getTime());
-    }
-    else if(this.afterFilter){
-      console.log('After');
-      console.log(this.afterFilter.getTime());
-    }
+    console.log(this.queryParameters);
     var options;
     this.subredditsFormatted = '';
     if (this.subreddits) {
@@ -114,20 +111,27 @@ export class SearchComponent implements OnInit {
           size: this.size,
         },
       };
-    } else {
-      options = {
-        params: {
-          q: this.q,
-          size: this.size,
-        },
-      };
+      this.queryParameters.subreddit = this.subredditsFormatted;
+    }
+    this.queryParameters.q = this.q;
+    this.queryParameters.size = this.size;
+    // console.log(options);
+    if(this.beforeFilter){
+      console.log('Before');
+      console.log(Math.round(this.beforeFilter.getTime()/1000));
+      this.queryParameters.before=Math.round(this.beforeFilter.getTime()/1000);
+    }
+    if(this.afterFilter){
+      console.log('After');
+      console.log(Math.round(this.afterFilter.getTime()/1000));
+      this.queryParameters.after=Math.round(this.afterFilter.getTime()/1000);
     }
     this.http
       .get(
         'https://api.pushshift.io/reddit/' +
           this.selectedEndpoint.urlSegment +
           '/search',
-        options
+        {params: this.queryParameters}
       )
       .subscribe((res) => {
         // console.log(res);
