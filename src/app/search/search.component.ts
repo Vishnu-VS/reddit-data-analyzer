@@ -26,6 +26,7 @@ export class SearchComponent implements OnInit {
   showBefore = false;
   showAfter = false;
   queryParameters: any = {};
+  generatedUrl: string;
 
   constructor(
     private http: HttpClient
@@ -135,9 +136,11 @@ export class SearchComponent implements OnInit {
       )
       .subscribe((res) => {
         // console.log(res);
-        this.rawResponse = res;
-        this.code = JSON.stringify(this.rawResponse, null, 2);
+        // this.rawResponse = res;
+        // this.code = JSON.stringify(this.rawResponse, null, 2);
       });
+
+
       this.http
       .get(
         'https://api.pushshift.io/reddit/' +
@@ -147,8 +150,9 @@ export class SearchComponent implements OnInit {
       )
       .subscribe((res) => {
         console.log(res);
-        // this.rawResponse = res;
-        // this.code = JSON.stringify(this.rawResponse, null, 2);
+        this.generatedUrl = res.url;
+        this.rawResponse = res.body;
+        this.code = JSON.stringify(this.rawResponse, null, 2);
       });
   }
 }

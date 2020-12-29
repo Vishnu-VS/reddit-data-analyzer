@@ -53,3 +53,12 @@ pre {
   padding-top: 20px;
   padding-bottom: 20px;
 }
+.url-class{
+  color: var(--primary-color);
+  word-break: break-all;
+}
+:host ::ng-deep .p-tabview .p-tabview-panels, :host ::ng-deep .p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  background: var(--surface-b);
+}
+
+
