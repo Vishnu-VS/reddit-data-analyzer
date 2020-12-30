@@ -11,6 +11,7 @@ import {Filter} from './filter';
 export class SearchComponent implements OnInit {
   endpoints: Endpoint[];
   selectedEndpoint: Endpoint;
+  submittedEndpoint: Endpoint;
   rawResponse: any;
   q: string;
   subreddits: any;
@@ -109,7 +110,7 @@ export class SearchComponent implements OnInit {
         params: {
           subreddit: this.subredditsFormatted,
           q: this.q,
-          size: this.size,
+          size: this.size
         },
       };
       this.queryParameters.subreddit = this.subredditsFormatted;
@@ -127,18 +128,18 @@ export class SearchComponent implements OnInit {
       console.log(Math.round(this.afterFilter.getTime()/1000));
       this.queryParameters.after=Math.round(this.afterFilter.getTime()/1000);
     }
-    this.http
-      .get(
-        'https://api.pushshift.io/reddit/' +
-          this.selectedEndpoint.urlSegment +
-          '/search',
-        {params: this.queryParameters}
-      )
-      .subscribe((res) => {
-        // console.log(res);
-        // this.rawResponse = res;
-        // this.code = JSON.stringify(this.rawResponse, null, 2);
-      });
+    // this.http
+    //   .get(
+    //     'https://api.pushshift.io/reddit/' +
+    //       this.selectedEndpoint.urlSegment +
+    //       '/search',
+    //     {params: this.queryParameters}
+    //   )
+    //   .subscribe((res) => {
+    //     // console.log(res);
+    //     // this.rawResponse = res;
+    //     // this.code = JSON.stringify(this.rawResponse, null, 2);
+    //   });
 
 
       this.http
@@ -149,6 +150,7 @@ export class SearchComponent implements OnInit {
         {params: this.queryParameters, observe: 'response'}
       )
       .subscribe((res) => {
+        this.submittedEndpoint = this.selectedEndpoint;
         console.log(res);
         this.generatedUrl = res.url;
         this.rawResponse = res.body;

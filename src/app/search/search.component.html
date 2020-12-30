@@ -82,10 +82,27 @@
     </p-card>
   </div>
   <p-tabView *ngIf="code">
-    <p-tabPanel header="Pretty">
-       Coming Soon..
+    <p-tabPanel header="Pretty" [selected]="true">
+       <div *ngIf="submittedEndpoint.urlSegment.includes('comment')">
+         <div class="submission-margins" *ngFor="let comment of rawResponse.data">
+          <p-card>
+            <p style="margin-bottom: 5px;margin-top: 0;"><a [href]=" 'https://reddit.com/user/' + comment.author" class="url-class">{{comment.author}}</a> {{comment.score}} point {{comment.created_utc+"000" | date:'medium'}}</p>
+            <p>{{comment.body}}</p>
+            <small>Permalink: <a [href]=" 'https://reddit.com/' + comment.permalink" class="url-class">https://reddit.com/{{comment.permalink}}</a></small>
+          </p-card>
+         </div>
+       </div>
+       <div *ngIf="submittedEndpoint.urlSegment.includes('submission')">
+        <div class="submission-margins" *ngFor="let submission of rawResponse.data">
+          <p-card>
+            <p style="margin-bottom: 5px;margin-top: 0;"><a [href]=" 'https://reddit.com/user/' + submission.author" class="url-class">{{submission.author}}</a> {{submission.score}} points {{submission.created_utc+"000" | date:'medium'}}</p>
+            <h3 style="margin-bottom: 5px;margin-top: 5px;"><a [href]=" 'https://reddit.com/' + submission.permalink" class="url-class-ellipsis">{{submission.title}}</a></h3>
+            <small class="ellipsis-text"><a [href]="submission.url" class="url-class-ellipsis" target="_blank">{{submission.url}}</a></small>
+          </p-card>
+         </div>
+       </div>
     </p-tabPanel>
-    <p-tabPanel header="Raw" [selected]="true">
+    <p-tabPanel header="Raw">
       <p-scrollPanel [style]="{width: '100%', height: '500px'}" styleClass="custombar1">
         <pre>
           <code [highlight]="code" [languages]="languages" (highlighted)="onHighlight($event)"></code>

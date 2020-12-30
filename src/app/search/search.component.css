@@ -12,6 +12,14 @@ pre {
   margin-bottom: 50px;
 }
 
+/* :host ::ng-deep p-scrollpanel .p-scrollpanel.custombar1{
+  overflow-x: hidden;
+} */
+
+:host ::ng-deep p-scrollpanel .p-scrollpanel.custombar1 .p-scrollpanel-bar-x{
+  display: none;
+}
+
 :host ::ng-deep p-scrollpanel .p-scrollpanel.custombar1 .p-scrollpanel-bar {
   background-color: var(--primary-color);
   opacity: 1;
@@ -57,8 +65,22 @@ pre {
   color: var(--primary-color);
   word-break: break-all;
 }
+.url-class-ellipsis{
+  color: var(--primary-color);
+}
 :host ::ng-deep .p-tabview .p-tabview-panels, :host ::ng-deep .p-tabview .p-tabview-nav li .p-tabview-nav-link {
   background: var(--surface-b);
 }
 
+.submission-margins{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 
+.ellipsis-text{
+  width: 100%;
+  overflow-x: hidden;
+  white-space: pre;
+  display: block;
+  text-overflow: ellipsis;
+}
