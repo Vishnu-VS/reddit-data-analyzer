@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/42eaa691-2791-40e7-b9ae-b7ccbbafd485/deploy-status)](https://app.netlify.com/sites/reddit-data-analyzer/deploys)
+
 # RedditAnalyzer
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.2.
