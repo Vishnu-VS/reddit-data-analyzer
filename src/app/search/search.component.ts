@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Endpoint } from './endpoint';
-import {Filter} from './filter';
+import { Filter } from './filter';
 
 @Component({
   selector: 'app-search',
@@ -13,6 +13,7 @@ export class SearchComponent implements OnInit {
   selectedEndpoint: Endpoint;
   submittedEndpoint: Endpoint;
   rawResponse: any;
+  sanitizedResponse: any;
   q: string;
   subreddits: any;
   subredditsFormatted: string = '';
@@ -29,9 +30,7 @@ export class SearchComponent implements OnInit {
   queryParameters: any = {};
   generatedUrl: string;
 
-  constructor(
-    private http: HttpClient
-  ) {
+  constructor(private http: HttpClient) {
     this.endpoints = [
       { name: 'Comments', urlSegment: 'comment' },
       { name: 'Submission', urlSegment: 'submission' },
@@ -118,15 +117,19 @@ export class SearchComponent implements OnInit {
     this.queryParameters.q = this.q;
     this.queryParameters.size = this.size;
     // console.log(options);
-    if(this.beforeFilter){
+    if (this.beforeFilter) {
       // console.log('Before');
-      console.log(Math.round(this.beforeFilter.getTime()/1000));
-      this.queryParameters.before=Math.round(this.beforeFilter.getTime()/1000);
+      console.log(Math.round(this.beforeFilter.getTime() / 1000));
+      this.queryParameters.before = Math.round(
+        this.beforeFilter.getTime() / 1000
+      );
     }
-    if(this.afterFilter){
+    if (this.afterFilter) {
       // console.log('After');
-      console.log(Math.round(this.afterFilter.getTime()/1000));
-      this.queryParameters.after=Math.round(this.afterFilter.getTime()/1000);
+      console.log(Math.round(this.afterFilter.getTime() / 1000));
+      this.queryParameters.after = Math.round(
+        this.afterFilter.getTime() / 1000
+      );
     }
     // this.http
     //   .get(
@@ -141,20 +144,32 @@ export class SearchComponent implements OnInit {
     //     // this.code = JSON.stringify(this.rawResponse, null, 2);
     //   });
 
-
-      this.http
+    this.http
       .get(
         'https://api.pushshift.io/reddit/' +
           this.selectedEndpoint.urlSegment +
           '/search',
-        {params: this.queryParameters, observe: 'response'}
+        { params: this.queryParameters, observe: 'response' }
       )
       .subscribe((res) => {
+        debugger;
         this.submittedEndpoint = this.selectedEndpoint;
         console.log(res);
         this.generatedUrl = res.url;
         this.rawResponse = res.body;
         this.code = JSON.stringify(this.rawResponse, null, 2);
+        if(this.selectedEndpoint.urlSegment == "submission"){
+          for(let i = 0; i < this.rawResponse.data.length; i++){
+            if(this.rawResponse.data[i].hasOwnProperty('preview')){
+              if(this.rawResponse.data[i].preview.images[0].resolutions.length > 0){
+                //console.log(this.rawResponse.data[i].preview.images[0].resolutions[1].url);
+                this.rawResponse.data[i].preview.images[0].resolutions[1].url = this.rawResponse.data[i].preview.images[0].resolutions[1].url.replace(/&amp;/g,"&");
+                //console.log(this.rawResponse.data[i].preview.images[0].resolutions[1].url);
+              }
+            }
+          }
+          console.log(this.rawResponse);
+        }
       });
   }
 }

@@ -78,7 +78,7 @@ pre {
 }
 
 .ellipsis-text{
-  width: 100%;
+  width: 250px;
   overflow-x: hidden;
   white-space: pre;
   display: block;
