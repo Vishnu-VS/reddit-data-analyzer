@@ -22,3 +22,16 @@
   border-right: 0;
 }
 
+:host ::ng-deep p-sidebar .p-sidebar{
+  padding: 0;
+}
+
+:host ::ng-deep p-menu .p-menu{
+  width: 100%;
+  border: 0;
+}
+
+:host ::ng-deep p-sidebar .p-sidebar-close{
+  margin: 0.75rem 1rem;
+}
+

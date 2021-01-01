@@ -133,7 +133,9 @@ export class SearchComponent implements OnInit {
           this.afterFilter.getTime() / 1000
         );
       } else {
-        delete this.queryParameters['after'];
+        if(this.queryParameters.hasOwnProperty('after')){
+          delete this.queryParameters['after'];
+        }
       }
     } else if (this.afterFilter && this.showAfter) {
       // console.log('After');
@@ -148,7 +150,9 @@ export class SearchComponent implements OnInit {
           this.beforeFilter.getTime() / 1000
         );
       } else {
-        delete this.queryParameters['before'];
+        if(this.queryParameters.hasOwnProperty('before')){
+          delete this.queryParameters['before'];
+        }
       }
     } else {
       if(this.queryParameters.hasOwnProperty('before')){

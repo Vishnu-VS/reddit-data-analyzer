@@ -11,8 +11,10 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { CalendarModule } from 'primeng/calendar';
 import { CardModule } from 'primeng/card';
-import {TooltipModule} from 'primeng/tooltip';
-import {TabViewModule} from 'primeng/tabview';
+import { TooltipModule } from 'primeng/tooltip';
+import { TabViewModule } from 'primeng/tabview';
+import { SidebarModule } from 'primeng/sidebar';
+import { MenuModule } from 'primeng/menu';
 
 @NgModule({
   declarations: [],
@@ -30,7 +32,9 @@ import {TabViewModule} from 'primeng/tabview';
     CalendarModule,
     CardModule,
     TooltipModule,
-    TabViewModule
+    TabViewModule,
+    SidebarModule,
+    MenuModule,
   ],
   exports: [
     ToolbarModule,
@@ -45,7 +49,9 @@ import {TabViewModule} from 'primeng/tabview';
     CalendarModule,
     CardModule,
     TooltipModule,
-    TabViewModule
+    TabViewModule,
+    SidebarModule,
+    MenuModule,
   ],
 })
 export class PrimeNGModule {}
