@@ -116,6 +116,7 @@ export class SearchComponent implements OnInit {
     }
     this.queryParameters.q = this.q;
     this.queryParameters.size = this.size;
+    this.queryParameters.html_decode = true;
     // console.log(options);
     // debugger;
 
@@ -215,6 +216,8 @@ export class SearchComponent implements OnInit {
               'https://reddit.com' + this.rawResponse.data[i].permalink;
             this.submissions[i].title = this.rawResponse.data[i].title;
             this.submissions[i].url = this.rawResponse.data[i].url;
+            this.submissions[i].subreddit = 'r/'+this.rawResponse.data[i].subreddit;
+            this.submissions[i].subredditUrl = 'https://reddit.com/r/' + this.rawResponse.data[i].subreddit;
             if (this.rawResponse.data[i].hasOwnProperty('preview')) {
               try {
                 if (
@@ -248,6 +251,8 @@ export class SearchComponent implements OnInit {
             this.comments[i].permalinkUrl =
               'https://reddit.com' + this.rawResponse.data[i].permalink;
             this.comments[i].body = this.rawResponse.data[i].body;
+            this.comments[i].subreddit = 'r/'+this.rawResponse.data[i].subreddit;
+            this.comments[i].subredditUrl = 'https://reddit.com/r/' + this.rawResponse.data[i].subreddit;
           }
           console.log(this.comments.length);
         }
