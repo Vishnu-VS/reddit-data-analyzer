@@ -5,5 +5,7 @@ export interface Comments{
   created_utc: String,
   body: String,
   permalink: String,
-  permalinkUrl: String
+  permalinkUrl: String,
+  subreddit: String,
+  subredditUrl: String,
 }

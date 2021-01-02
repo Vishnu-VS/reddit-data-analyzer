@@ -86,8 +86,8 @@
        <div *ngIf="comments">
          <div class="submission-margins" *ngFor="let comment of comments">
           <p-card>
-            <p style="margin-bottom: 5px;margin-top: 0;"><a [href]="comment.authorUrl" class="url-class">{{comment.author}}</a> {{comment.score}} point {{comment.created_utc | date:'long'}}</p>
-            <p>{{comment.body}}</p>
+            <p style="margin-bottom: 5px;margin-top: 0;"><a [href]="comment.authorUrl" class="url-class">{{comment.author}}</a>&nbsp;&nbsp;<a [href]="comment.subredditUrl" class="url-class">{{comment.subreddit}}</a>&nbsp;&nbsp;{{comment.score}} point {{comment.created_utc | date:'long'}}</p>
+            <p style="word-break: break-word; white-space: pre-line;">{{comment.body}}</p>
             <small>Permalink: <a [href]="comment.permalinkUrl" class="url-class">{{comment.permalink}}</a></small>
           </p-card>
          </div>
@@ -100,7 +100,7 @@
                 <img [src]="submission.previewUrl" style="width: 216px;">
               </div>
               <div>
-                <p style="margin-bottom: 5px;margin-top: 0;"><a [href]="submission.authorUrl" class="url-class">{{submission.author}}</a> {{submission.score}} points {{submission.created_utc | date:'long'}}</p>
+                <p style="margin-bottom: 5px;margin-top: 0;"><a [href]="submission.authorUrl" class="url-class">{{submission.author}}</a>&nbsp;&nbsp;<a [href]="submission.subredditUrl" class="url-class">{{submission.subreddit}}</a>&nbsp;&nbsp;{{submission.score}} points {{submission.created_utc | date:'long'}}</p>
                 <h3 style="margin-bottom: 5px;margin-top: 5px;"><a [href]="submission.permalinkUrl" class="url-class-ellipsis">{{submission.title}}</a></h3>
                 <small class="ellipsis-text"><a [href]="submission.url" class="url-class-ellipsis" target="_blank">{{submission.url}}</a></small>
               </div>
