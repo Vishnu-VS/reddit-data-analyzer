@@ -1,21 +1,35 @@
-
 <div class="layout">
   <p-sidebar [(visible)]="visibleSidebar1" [baseZIndex]="10000">
     <!-- <h1 style="font-weight:normal">Menu</h1> -->
     <p-menu [model]="items"></p-menu>
-</p-sidebar>
-<p-toolbar class="header-bar">
-  <div class="p-toolbar-group-left">
-    <button pButton pRipple type="button" class="p-button-text" (click)="visibleSidebar1 = true" icon="pi pi-bars"></button>
-    <h1 class="title">{{title}}</h1>
+  </p-sidebar>
+  <p-toolbar class="header-bar">
+    <div class="p-toolbar-group-left">
+      <button
+        pButton
+        pRipple
+        type="button"
+        class="p-button-text"
+        (click)="visibleSidebar1 = true"
+        icon="pi pi-bars"
+      ></button>
+      <h1 class="title">{{ title }}</h1>
+    </div>
+    <div style="flex-grow: 0.5; margin-left: 10px;margin-right: 10px;">
+      <app-search-bar></app-search-bar>
+    </div>
+    <div class="p-toolbar-group-right">
+      <iframe
+        src="https://ghbtns.com/github-btn.html?user=vishnu-vs&repo=reddit-data-analyzer&type=star&count=true"
+        frameborder="0"
+        scrolling="0"
+        width="94"
+        height="20"
+        title="GitHub"
+      ></iframe>
+    </div>
+  </p-toolbar>
+  <div class="layout-search">
+    <router-outlet></router-outlet>
   </div>
-
-  <div class="p-toolbar-group-right">
-    <iframe src="https://ghbtns.com/github-btn.html?user=vishnu-vs&repo=reddit-data-analyzer&type=star&count=true" frameborder="0" scrolling="0" width="94" height="20" title="GitHub"></iframe>
-  </div>
-</p-toolbar>
-<div class="layout-search">
-  <app-search></app-search>
 </div>
-</div>
-

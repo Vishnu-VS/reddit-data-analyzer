@@ -1,0 +1,13 @@
+<div class="p-inputgroup">
+  <p-dropdown id="endPoint" [options]="endpoints" [(ngModel)]="selectedEndpoint" optionLabel="name" (onChange)="endpointChange($event)"></p-dropdown>
+  <input type="text" pInputText placeholder="Search" [(ngModel)]="q" />
+  <button
+    pTooltip="Search all of reddit"
+    tooltipPosition="bottom"
+    pButton
+    pRipple
+    icon="pi pi-search"
+    class="p-button-outlined p-button-secondary border-search"
+    (click)="submit($event)"
+  ></button>
+</div>

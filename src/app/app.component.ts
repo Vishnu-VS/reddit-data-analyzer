@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MenuItem, PrimeNGConfig } from 'primeng/api';
+import { Endpoint } from './search/endpoint';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,9 @@ export class AppComponent implements OnInit {
   visibleSidebar1;
   items: MenuItem[];
 
-  constructor(private primengConfig: PrimeNGConfig) {}
+
+  constructor(private primengConfig: PrimeNGConfig) {
+  }
 
   title = 'Reddit Data Analyzer';
 

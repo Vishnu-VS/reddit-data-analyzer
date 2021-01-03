@@ -8,11 +8,13 @@ import { AppComponent } from './app.component';
 import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 import { SearchComponent } from './search/search.component';
 import { PrimeNGModule } from './prime-ng/prime-ng.module';
+import { SearchBarComponent } from './search-bar/search-bar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SearchComponent
+    SearchComponent,
+    SearchBarComponent
   ],
   imports: [
     BrowserModule,

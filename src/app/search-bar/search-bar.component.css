@@ -1,0 +1,12 @@
+:host ::ng-deep p-dropdown#endPoint .p-dropdown:not(.p-disabled):hover {
+  border-color: var(--surface-d) !important;
+}
+:host ::ng-deep p-dropdown#endPoint .p-dropdown{
+  border-right: 0px !important;
+  border-bottom-right-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+.border-search{
+  border-color: var(--surface-d) !important;
+  border-left: 0px !important;
+}

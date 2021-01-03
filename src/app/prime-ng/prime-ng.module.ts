@@ -15,6 +15,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { TabViewModule } from 'primeng/tabview';
 import { SidebarModule } from 'primeng/sidebar';
 import { MenuModule } from 'primeng/menu';
+import {ToastModule} from 'primeng/toast';
 
 @NgModule({
   declarations: [],
@@ -35,6 +36,7 @@ import { MenuModule } from 'primeng/menu';
     TabViewModule,
     SidebarModule,
     MenuModule,
+    ToastModule
   ],
   exports: [
     ToolbarModule,
@@ -52,6 +54,7 @@ import { MenuModule } from 'primeng/menu';
     TabViewModule,
     SidebarModule,
     MenuModule,
+    ToastModule
   ],
 })
 export class PrimeNGModule {}

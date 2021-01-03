@@ -20,6 +20,7 @@
   border-top: 0;
   border-left: 0;
   border-right: 0;
+  padding: 0px;
 }
 
 :host ::ng-deep p-sidebar .p-sidebar{
@@ -34,4 +35,6 @@
 :host ::ng-deep p-sidebar .p-sidebar-close{
   margin: 0.75rem 1rem;
 }
+
+
 

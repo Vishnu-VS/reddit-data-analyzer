@@ -1,27 +1,14 @@
+<p-toast></p-toast>
 <div style="padding-bottom: 50px;">
   <div class="start-padding-top">
-    <p-card header="Search Reddit">
+    <p-card>
       <div class="p-fluid p-formgrid p-grid">
         <div class="form-item p-field p-col">
           <span class="p-float-label">
-            <p-dropdown id="endPoint" [options]="endpoints" [(ngModel)]="selectedEndpoint" optionLabel="name" (onChange)="endpointChange($event)"></p-dropdown>
-            <label for="endPoint">Choose Endpoint</label>
-          </span>
-        </div>
-        <div class="form-item p-field p-col">
-          <span class="p-float-label">
-            <p-chips pTooltip="Use commas to enter more than one subreddit." tooltipPosition="top" aria-describedby="subreddit-help" id="subreddits" [(ngModel)]="subreddits" addOnBlur="true" separator="," (onBlur)="subredditOutOfFocus($event)"></p-chips>
+            <p-chips aria-describedby="subreddit-help" id="subreddits" [(ngModel)]="subreddits" addOnBlur="true" separator="," (onBlur)="subredditOutOfFocus($event)"></p-chips>
             <label for="subreddits">Subreddit</label>
           </span>
           <!-- <small id="subreddit-help">Use commas to enter more than one subreddit.</small> -->
-        </div>
-      </div>
-      <div class="p-fluid p-formgrid p-grid">
-        <div class="form-item p-field p-col">
-            <span class="p-input-icon-left">
-                <i class="pi pi-search"></i>
-                <input id="searchTerms" type="text" pInputText [(ngModel)]="q" placeholder="Search Query"/>
-            </span>
         </div>
         <div class="form-item p-field p-col">
           <p-slider [(ngModel)]="size"></p-slider>
@@ -69,11 +56,6 @@
           </div>
         </div>
       </div>
-      <div class="p-fluid p-formgrid p-grid">
-        <div class="form-item p-field p-col">
-          <p-button label="Submit" (onClick)="submit($event)"></p-button>
-        </div>
-      </div>
     </p-card>
   </div>
   <div style="margin-bottom: 20px" *ngIf="generatedUrl">
@@ -92,7 +74,7 @@
           </p-card>
          </div>
        </div>
-       <div *ngIf="submittedEndpoint.urlSegment.includes('submission')">
+       <div *ngIf="endpoint.includes('submission')">
         <div class="submission-margins" *ngFor="let submission of submissions">
           <p-card>
             <div style="display: flex;">
@@ -101,7 +83,7 @@
               </div>
               <div>
                 <p style="margin-bottom: 5px;margin-top: 0;"><a [href]="submission.authorUrl" class="url-class">{{submission.author}}</a>&nbsp;&nbsp;<a [href]="submission.subredditUrl" class="url-class">{{submission.subreddit}}</a>&nbsp;&nbsp;{{submission.score}} points {{submission.created_utc | date:'long'}}</p>
-                <h3 style="margin-bottom: 5px;margin-top: 5px;"><a [href]="submission.permalinkUrl" class="url-class-ellipsis">{{submission.title}}</a></h3>
+                <h3 style="margin-bottom: 5px;margin-top: 5px;"><a [href]="submission.permalinkUrl" class="url-class-ellipsis" style="word-break: break-word;">{{submission.title}}</a></h3>
                 <small class="ellipsis-text"><a [href]="submission.url" class="url-class-ellipsis" target="_blank">{{submission.url}}</a></small>
               </div>
             </div>
