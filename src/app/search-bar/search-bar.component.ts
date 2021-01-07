@@ -6,17 +6,18 @@ import { Endpoint } from '../search/endpoint';
 @Component({
   selector: 'app-search-bar',
   templateUrl: './search-bar.component.html',
-  styleUrls: ['./search-bar.component.css'],
+  styleUrls: ['./search-bar.component.css']
 })
 export class SearchBarComponent implements OnInit {
   endpoints: Endpoint[];
   selectedEndpoint: Endpoint;
   q: String;
+  emptyQuery = false;
 
   constructor(private router: Router, private searchEvent: SearchService) {
     this.endpoints = [
       { name: 'Comments', urlSegment: 'comment' },
-      { name: 'Submission', urlSegment: 'submission' },
+      { name: 'Posts', urlSegment: 'submission' },
       { name: 'Subreddit', urlSegment: 'subreddit' },
     ];
     this.selectedEndpoint = this.endpoints[1];
@@ -29,12 +30,20 @@ export class SearchBarComponent implements OnInit {
   }
 
   submit(event: any) {
+    this.emptyQuery = false;
     // this.router.navigate(['/search'], {
     //   queryParams: { endpoint: this.selectedEndpoint.urlSegment, q: this.q },
     // });
     if(this.q){
       this.sendMessage();
     }
+    else{
+      this.emptyQuery = true;
+    }
+  }
+
+  qsearchQueryChange(e){
+    this.emptyQuery = false;
   }
 
   sendMessage(): void {

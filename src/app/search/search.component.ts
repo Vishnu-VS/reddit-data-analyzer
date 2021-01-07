@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Endpoint } from './endpoint';
 import { Filter } from './filter';
 import { Comments } from './comments';
@@ -43,6 +43,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   validParams = true;
   querySubscription: any;
   searchSubscription: any;
+  searchResultTerm: string = '';
 
   constructor(
     private http: HttpClient,
@@ -96,7 +97,7 @@ export class SearchComponent implements OnInit, OnDestroy {
         this.submit();
       }
       else{
-        this.messageService.add({severity:'error', summary: 'Error', detail: 'Incompatible query parameters'});
+        this.messageService.add({severity:'warn', summary: 'Please search again', detail: 'Incompatible query parameters'});
         this.router.navigate([], {
           relativeTo: this.route,
           queryParams: null,
@@ -198,6 +199,9 @@ export class SearchComponent implements OnInit, OnDestroy {
     // var options;
     this.queryParameters = {};
     this.queryParameters.html_decode = true;
+    if (this.endpoint == 'submission'){
+      this.queryParameters.over_18 = false;
+    }
     this.subredditsFormatted = '';
     if (this.subreddits) {
       for (let i = 0; i < this.subreddits.length; i++) {
@@ -236,6 +240,7 @@ export class SearchComponent implements OnInit, OnDestroy {
       .subscribe((res) => {
         // debugger;
         // this.endpoint = this.selectedEndpoint;
+        this.searchResultTerm = this.queryParameters.q;
         console.log(res);
         this.generatedUrl = res.url;
         this.rawResponse = res.body;
@@ -301,6 +306,10 @@ export class SearchComponent implements OnInit, OnDestroy {
           console.log(this.comments.length);
         }
         this.responseRecieved = true;
+      },
+      (err) => {
+        console.log(err);
+        this.messageService.add({severity:'error', summary: "Unkown Error Occurred", detail: "Please try again later"});
       });
   }
 }

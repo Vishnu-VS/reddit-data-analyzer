@@ -1,6 +1,6 @@
 <div class="p-inputgroup">
   <p-dropdown id="endPoint" [options]="endpoints" [(ngModel)]="selectedEndpoint" optionLabel="name" (onChange)="endpointChange($event)"></p-dropdown>
-  <input type="text" pInputText placeholder="Search" [(ngModel)]="q" />
+  <input type="text" pInputText placeholder="Search" [(ngModel)]="q" [ngClass]="{'p-invalid': emptyQuery}" (ngModelChange)="qsearchQueryChange($event)" aria-describedby="search-help"/>
   <button
     pTooltip="Search all of reddit"
     tooltipPosition="bottom"
@@ -11,3 +11,7 @@
     (click)="submit($event)"
   ></button>
 </div>
+<div style="text-align: center;">
+  <small *ngIf="emptyQuery" id="search-help" class="p-invalid">Please enter search term(s).</small>
+</div>
+

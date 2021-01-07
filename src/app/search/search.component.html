@@ -1,74 +1,77 @@
 <p-toast></p-toast>
 <div style="padding-bottom: 50px;">
   <div class="start-padding-top">
-    <p-card>
-      <div class="p-fluid p-formgrid p-grid">
-        <div class="form-item p-field p-col">
-          <span class="p-float-label">
-            <p-chips aria-describedby="subreddit-help" id="subreddits" [(ngModel)]="subreddits" addOnBlur="true" separator="," (onBlur)="subredditOutOfFocus($event)"></p-chips>
-            <label for="subreddits">Subreddit</label>
-          </span>
-          <!-- <small id="subreddit-help">Use commas to enter more than one subreddit.</small> -->
-        </div>
-        <div class="form-item p-field p-col">
-          <p-slider [(ngModel)]="size"></p-slider>
-          <h5 style="margin-top: 15px;margin-bottom: 0;">Number of results: {{size}}</h5>
-        </div>
-      </div>
-    </p-card>
-  </div>
-  <div style="margin-bottom: 20px;">
-    <p-card header="More Filters">
-      <div class="p-fluid p-formgrid p-grid">
-        <div class="form-item p-field p-col">
-          <p-multiSelect [options]="filters" [(ngModel)]="selectedFilters" defaultLabel="Select Filters" optionLabel="name" (onChange)="filterDropdownChange($event)" class="multiselect-custom">
-            <ng-template let-value pTemplate="selectedItems">
-              <div class="country-item country-item-value" *ngFor="let option of selectedFilters">
-                  <div>{{option.name}}</div>
-              </div>
-              <div *ngIf="!selectedFilters || selectedFilters.length === 0" class="country-placeholder">
-                  Select Filters
-              </div>
-            </ng-template>
-            <ng-template let-filter pTemplate="item">
-                <div class="country-item">
-                    <div>{{filter.name}}</div>
-                </div>
-            </ng-template>
-          </p-multiSelect>
-        </div>
-      </div>
-      <div *ngIf="selectedFilters">
-        <div *ngIf="showAfter" class="p-fluid p-formgrid p-grid">
-          <div  class="form-item p-field p-col">
-            <span class="p-float-label">
-              <p-calendar [(ngModel)]="afterFilter" [showTime]="true" inputId="after" dateFormat="dd.M.yy"></p-calendar>
-              <label for="after">After</label>
-            </span>
-          </div>
-        </div>
-        <div *ngIf="showBefore" class="p-fluid p-formgrid p-grid">
+    <p-card styleClass="filter-card">
+      <p-fieldset legend="Filters(0)" [toggleable]="true">
+        <div class="p-fluid p-formgrid p-grid">
           <div class="form-item p-field p-col">
             <span class="p-float-label">
-              <p-calendar [(ngModel)]="beforeFilter" [showTime]="true" inputId="before" dateFormat="dd.M.yy"></p-calendar>
-              <label for="before">Before</label>
+              <p-chips aria-describedby="subreddit-help" id="subreddits" [(ngModel)]="subreddits" addOnBlur="true" separator="," (onBlur)="subredditOutOfFocus($event)"></p-chips>
+              <label for="subreddits">Subreddit</label>
             </span>
+            <!-- <small id="subreddit-help">Use commas to enter more than one subreddit.</small> -->
           </div>
         </div>
-      </div>
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="form-item p-field p-col" style="margin-bottom: 30px;">
+            <p style="margin-top:0; margin-bottom: 15px; text-align: center;font-weight: 400;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);">Number of results: {{size}}</p>
+            <p-slider [(ngModel)]="size"></p-slider>
+          </div>
+        </div>
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="form-item p-field p-col">
+            <span class="p-float-label">
+            <p-multiSelect [options]="filters" [(ngModel)]="selectedFilters" optionLabel="name" (onChange)="filterDropdownChange($event)" class="multiselect-custom" id="moreFilters">
+              <ng-template let-value pTemplate="selectedItems">
+                <div class="country-item country-item-value" *ngFor="let option of selectedFilters">
+                    <div>{{option.name}}</div>
+                </div>
+                <div *ngIf="!selectedFilters || selectedFilters.length === 0" class="country-placeholder">
+                    Select Filters
+                </div>
+              </ng-template>
+              <ng-template let-filter pTemplate="item">
+                  <div class="country-item">
+                      <div>{{filter.name}}</div>
+                  </div>
+              </ng-template>
+            </p-multiSelect>
+            <label for="moreFilters">More Filters</label>
+          </span>
+
+          </div>
+        </div>
+        <div *ngIf="selectedFilters">
+          <div *ngIf="showAfter" class="p-fluid p-formgrid p-grid">
+            <div  class="form-item p-field p-col">
+              <span class="p-float-label">
+                <p-calendar [(ngModel)]="afterFilter" [showTime]="true" inputId="after" dateFormat="dd.M.yy"></p-calendar>
+                <label for="after">After</label>
+              </span>
+            </div>
+          </div>
+          <div *ngIf="showBefore" class="p-fluid p-formgrid p-grid">
+            <div class="form-item p-field p-col">
+              <span class="p-float-label">
+                <p-calendar [(ngModel)]="beforeFilter" [showTime]="true" inputId="before" dateFormat="dd.M.yy"></p-calendar>
+                <label for="before">Before</label>
+              </span>
+            </div>
+          </div>
+        </div>
+    </p-fieldset>
     </p-card>
   </div>
-  <div style="margin-bottom: 20px" *ngIf="generatedUrl">
-    <p-card>
-      <p style="display: inline;">URL:</p><a [href]="generatedUrl" class="url-class">{{generatedUrl}}</a>
-    </p-card>
-  </div>
+
   <p-tabView *ngIf="responseRecieved">
     <p-tabPanel header="Pretty" [selected]="true">
+      <h4>Search Results for "{{searchResultTerm}}"</h4>
        <div *ngIf="comments">
          <div class="submission-margins" *ngFor="let comment of comments">
           <p-card>
-            <p style="margin-bottom: 5px;margin-top: 0;"><a [href]="comment.authorUrl" class="url-class">{{comment.author}}</a>&nbsp;&nbsp;<a [href]="comment.subredditUrl" class="url-class">{{comment.subreddit}}</a>&nbsp;&nbsp;{{comment.score}} point {{comment.created_utc | date:'long'}}</p>
+            <p style="margin-bottom: 5px;margin-top: 0;"><a [href]="comment.authorUrl" class="url-class" style="text-decoration: none;">{{comment.author}}</a>&nbsp;&nbsp;<a [href]="comment.subredditUrl" class="url-class">{{comment.subreddit}}</a>&nbsp;&nbsp;{{comment.score}} point {{comment.created_utc | date:'long'}}</p>
             <p style="word-break: break-word; white-space: pre-line;">{{comment.body}}</p>
             <small>Permalink: <a [href]="comment.permalinkUrl" class="url-class">{{comment.permalink}}</a></small>
           </p-card>
@@ -77,13 +80,13 @@
        <div *ngIf="endpoint.includes('submission')">
         <div class="submission-margins" *ngFor="let submission of submissions">
           <p-card>
-            <div style="display: flex;">
+            <div class="submissions-container">
               <div style="margin-right: 20px;" *ngIf="submission.previewUrl">
                 <img [src]="submission.previewUrl" style="width: 216px;">
               </div>
               <div>
-                <p style="margin-bottom: 5px;margin-top: 0;"><a [href]="submission.authorUrl" class="url-class">{{submission.author}}</a>&nbsp;&nbsp;<a [href]="submission.subredditUrl" class="url-class">{{submission.subreddit}}</a>&nbsp;&nbsp;{{submission.score}} points {{submission.created_utc | date:'long'}}</p>
-                <h3 style="margin-bottom: 5px;margin-top: 5px;"><a [href]="submission.permalinkUrl" class="url-class-ellipsis" style="word-break: break-word;">{{submission.title}}</a></h3>
+                <p style="margin-bottom: 5px;margin-top: 0;"><a [href]="submission.authorUrl" class="url-class" style="text-decoration: none;">{{submission.author}}</a>&nbsp;&nbsp;<a [href]="submission.subredditUrl" class="url-class">{{submission.subreddit}}</a>&nbsp;&nbsp;{{submission.score}} points {{submission.created_utc | date:'long'}}</p>
+                <h3 style="margin-bottom: 5px;margin-top: 5px;word-break: break-word;white-space: pre-line;"><a [href]="submission.permalinkUrl" class="url-class-ellipsis" style="text-decoration: none;">{{submission.title}}</a></h3>
                 <small class="ellipsis-text"><a [href]="submission.url" class="url-class-ellipsis" target="_blank">{{submission.url}}</a></small>
               </div>
             </div>
@@ -94,6 +97,11 @@
        </div>
     </p-tabPanel>
     <p-tabPanel header="Raw">
+      <div style="margin-bottom: 20px" *ngIf="generatedUrl">
+        <p-card>
+          <a [href]="generatedUrl" class="url-class">{{generatedUrl}}</a>
+        </p-card>
+      </div>
       <p-scrollPanel [style]="{width: '100%', height: '500px'}" styleClass="custombar1">
         <pre>
           <code [highlight]="code" [languages]="languages" (highlighted)="onHighlight($event)"></code>

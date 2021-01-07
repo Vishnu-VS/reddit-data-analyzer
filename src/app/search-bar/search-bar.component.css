@@ -10,3 +10,8 @@
   border-color: var(--surface-d) !important;
   border-left: 0px !important;
 }
+#search-help{
+  font-size: 10px;
+  display: block;
+}
+

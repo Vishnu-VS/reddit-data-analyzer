@@ -20,13 +20,21 @@ pre {
   display: none;
 }
 
-:host ::ng-deep p-scrollpanel .p-scrollpanel.custombar1 .p-scrollpanel-bar {
+/*Use this for implementing light/dark mode. CSS variables provides defaults for scroll bar color in raw tab.*/
+
+/* :host ::ng-deep p-scrollpanel .p-scrollpanel.custombar1 .p-scrollpanel-bar {
   background-color: var(--primary-color);
   opacity: 1;
   transition: background-color .2s;
 }
 :host ::ng-deep p-scrollpanel .p-scrollpanel.custombar1 .p-scrollpanel-bar:hover{
   background-color: #007ad9;
+} */
+
+:host ::ng-deep p-card .p-card.filter-card{
+  max-width: 768px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .form-item {
@@ -83,4 +91,15 @@ pre {
   white-space: pre;
   display: block;
   text-overflow: ellipsis;
+}
+.submissions-container{
+  display: flex;
+}
+@media screen and (max-width: 609px){
+  .submissions-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 }
