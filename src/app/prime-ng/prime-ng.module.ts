@@ -17,6 +17,7 @@ import { SidebarModule } from 'primeng/sidebar';
 import { MenuModule } from 'primeng/menu';
 import { ToastModule } from 'primeng/toast';
 import { FieldsetModule } from 'primeng/fieldset';
+import { ProgressBarModule } from 'primeng/progressbar';
 
 @NgModule({
   declarations: [],
@@ -39,6 +40,7 @@ import { FieldsetModule } from 'primeng/fieldset';
     MenuModule,
     ToastModule,
     FieldsetModule,
+    ProgressBarModule,
   ],
   exports: [
     ToolbarModule,
@@ -58,6 +60,7 @@ import { FieldsetModule } from 'primeng/fieldset';
     MenuModule,
     ToastModule,
     FieldsetModule,
+    ProgressBarModule,
   ],
 })
 export class PrimeNGModule {}
