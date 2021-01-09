@@ -9,12 +9,14 @@ import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 import { SearchComponent } from './search/search.component';
 import { PrimeNGModule } from './prime-ng/prime-ng.module';
 import { SearchBarComponent } from './search-bar/search-bar.component';
+import { ScrollToTopComponent } from './scroll-to-top/scroll-to-top.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    ScrollToTopComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,12 @@
+.scroll-to-top {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  z-index: 10;
+  display: none;
+  transition: all .2s ease-in-out;
+ }
+ .show-scrollTop {
+  display: block;
+  transition: all .2s ease-in-out;
+ }
