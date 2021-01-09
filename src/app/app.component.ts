@@ -18,6 +18,7 @@ export class AppComponent implements OnInit {
   title = 'Reddit Data Analyzer';
 
   ngOnInit() {
+    this.visibleSidebar1 = false;
     this.primengConfig.ripple = true;
     this.items = [
       {
@@ -27,9 +28,9 @@ export class AppComponent implements OnInit {
             label: 'Search',
             icon: 'pi pi-search',
             routerLink: '/',
-            command: () => {
-              this.visibleSidebar1 = false;
-            },
+            // command: () => {
+            //   this.visibleSidebar1 = false;
+            // },
           },
           {
             label: 'About',

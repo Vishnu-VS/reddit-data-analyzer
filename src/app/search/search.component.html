@@ -95,6 +95,7 @@
           </p-card>
          </div>
        </div>
+       <div *ngIf="noResults">No results found</div>
     </p-tabPanel>
     <p-tabPanel header="Raw">
       <div style="margin-bottom: 20px" *ngIf="generatedUrl">

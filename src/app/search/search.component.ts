@@ -44,6 +44,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   querySubscription: any;
   searchSubscription: any;
   searchResultTerm: string = '';
+  noResults = false;
 
   constructor(
     private http: HttpClient,
@@ -72,6 +73,7 @@ export class SearchComponent implements OnInit, OnDestroy {
       if (this.endpoint === undefined) {
         this.validParams = false;
       }
+      this.subredditsFormatted = params['subreddit'];
       this.sizeParams = params['size'];
       this.before = Number(params['before']);
       this.after = Number(params['after']);
@@ -202,25 +204,22 @@ export class SearchComponent implements OnInit, OnDestroy {
     if (this.endpoint == 'submission'){
       this.queryParameters.over_18 = false;
     }
-    this.subredditsFormatted = '';
-    if (this.subreddits) {
-      for (let i = 0; i < this.subreddits.length; i++) {
-        if (this.subredditsFormatted == '') {
-          this.subredditsFormatted = this.subreddits[i];
-        } else {
-          this.subredditsFormatted =
-            this.subredditsFormatted + ',' + this.subreddits[i];
-        }
-      }
-      // console.log(this.subredditsFormatted);
-      // options = {
-      //   params: {
-      //     subreddit: this.subredditsFormatted,
-      //     q: this.q,
-      //     size: this.size,
-      //   },
-      // };
+    if (this.subredditsFormatted) {
       this.queryParameters.subreddit = this.subredditsFormatted;
+    }
+    else{
+      this.subredditsFormatted = '';
+      if (this.subreddits) {
+        for (let i = 0; i < this.subreddits.length; i++) {
+          if (this.subredditsFormatted == '') {
+            this.subredditsFormatted = this.subreddits[i];
+          } else {
+            this.subredditsFormatted =
+              this.subredditsFormatted + ',' + this.subreddits[i];
+          }
+        }
+        this.queryParameters.subreddit = this.subredditsFormatted;
+      }
     }
     this.queryParameters.q = this.q;
     if (this.sizeParams) {
@@ -245,6 +244,10 @@ export class SearchComponent implements OnInit, OnDestroy {
         this.generatedUrl = res.url;
         this.rawResponse = res.body;
         this.code = JSON.stringify(this.rawResponse, null, 2);
+        this.noResults = false;
+        if(this.rawResponse.data.length == 0){
+          this.noResults = true;
+        }
         if (this.endpoint == 'submission') {
           this.submissions = [];
           this.comments = null;

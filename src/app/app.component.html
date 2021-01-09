@@ -3,6 +3,7 @@
     <!-- <h1 style="font-weight:normal">Menu</h1> -->
     <p-menu [model]="items"></p-menu>
   </p-sidebar>
+  <p-progressBar mode="indeterminate" [style]="{'height': '1.5px'}"></p-progressBar>
   <p-toolbar class="header-bar">
     <div class="p-toolbar-group-left">
       <button
@@ -31,5 +32,7 @@
   </p-toolbar>
   <div class="layout-search">
     <router-outlet></router-outlet>
+    <app-scroll-to-top></app-scroll-to-top>
   </div>
+
 </div>
