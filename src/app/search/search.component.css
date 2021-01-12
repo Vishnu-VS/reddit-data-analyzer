@@ -16,7 +16,7 @@ pre {
   overflow-x: hidden;
 } */
 
-:host ::ng-deep p-scrollpanel .p-scrollpanel.custombar1 .p-scrollpanel-bar-x{
+:host ::ng-deep p-scrollpanel .p-scrollpanel.custombar1 .p-scrollpanel-bar-x {
   display: none;
 }
 
@@ -31,7 +31,7 @@ pre {
   background-color: #007ad9;
 } */
 
-:host ::ng-deep p-card .p-card.filter-card{
+:host ::ng-deep p-card .p-card.filter-card {
   max-width: 768px;
   margin-left: auto;
   margin-right: auto;
@@ -65,41 +65,50 @@ pre {
 :host ::ng-deep .multiselect-custom .country-placeholder {
   padding: 0.25rem;
 }
-.start-padding-top{
+.start-padding-top {
   padding-top: 20px;
   padding-bottom: 20px;
 }
-.url-class{
+.url-class {
   color: var(--primary-color);
   word-break: break-all;
 }
-.url-class-ellipsis{
+.url-class-ellipsis {
   color: var(--primary-color);
 }
-:host ::ng-deep .p-tabview .p-tabview-panels, :host ::ng-deep .p-tabview .p-tabview-nav li .p-tabview-nav-link {
+:host ::ng-deep .p-tabview .p-tabview-panels,
+:host ::ng-deep .p-tabview .p-tabview-nav li .p-tabview-nav-link {
   background: var(--surface-b);
 }
 
-.submission-margins{
+.submission-margins {
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
-.ellipsis-text{
+.ellipsis-text {
   width: 250px;
   overflow-x: hidden;
   white-space: pre;
   display: block;
   text-overflow: ellipsis;
 }
-.submissions-container{
+.submissions-container {
   display: flex;
 }
-@media screen and (max-width: 609px){
-  .submissions-container{
+@media screen and (max-width: 609px) {
+  .submissions-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
   }
+}
+
+:host ::ng-deep .p-card.content-cards {
+  border-radius: 6px;
+}
+
+:host ::ng-deep p-fieldset .p-fieldset-legend-text {
+  font-weight: 400;
 }

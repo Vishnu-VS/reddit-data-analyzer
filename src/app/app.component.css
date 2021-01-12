@@ -1,3 +1,7 @@
+:host ::ng-deep .p-component, :host ::ng-deep .p-inputtext{
+  font-family: 'Barlow Semi Condensed', sans-serif;
+}
+
 .layout{
   background-color: var(--surface-b);
   min-height: 100vh;
@@ -5,6 +9,7 @@
 .title{
   font-size: 1.5rem;
   margin-bottom: 18px;
+  font-weight: 300;
 }
 .reddit-logo{
   height: 65px;

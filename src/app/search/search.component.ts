@@ -201,9 +201,6 @@ export class SearchComponent implements OnInit, OnDestroy {
     // var options;
     this.queryParameters = {};
     this.queryParameters.html_decode = true;
-    if (this.endpoint == 'submission'){
-      this.queryParameters.over_18 = false;
-    }
     if (this.subredditsFormatted) {
       this.queryParameters.subreddit = this.subredditsFormatted;
     }

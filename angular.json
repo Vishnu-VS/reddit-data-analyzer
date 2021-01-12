@@ -22,7 +22,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
-            "assets": ["src/favicon.ico", "src/assets", "src/_redirects", "src/reddit-data-analyzer.png"],
+            "assets": ["src/favicon.ico", "src/assets", "src/_redirects", "src/apple-touch-icon.png", "src/favicon-32x32.png", "src/favicon-16x16.png", "src/site.webmanifest", "src/android-chrome-192x192.png", "src/android-chrome-512x512.png"],
             "styles": [
               "src/styles.css",
               "node_modules/primeicons/primeicons.css",

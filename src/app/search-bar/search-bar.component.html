@@ -1,4 +1,4 @@
-<div class="p-inputgroup">
+<div class="p-inputgroup" style="position: relative;">
   <p-dropdown id="endPoint" [options]="endpoints" [(ngModel)]="selectedEndpoint" optionLabel="name" (onChange)="endpointChange($event)"></p-dropdown>
   <input type="text" pInputText placeholder="Search" [(ngModel)]="q" [ngClass]="{'p-invalid': emptyQuery}" (ngModelChange)="qsearchQueryChange($event)" aria-describedby="search-help"/>
   <button
@@ -10,8 +10,9 @@
     class="p-button-outlined p-button-secondary border-search"
     (click)="submit($event)"
   ></button>
+  <div style="text-align: center;position: absolute; left: 50%; bottom: -12px;transform: translateX(-50%);">
+    <small *ngIf="emptyQuery" id="search-help" class="p-invalid">Please enter search term(s).</small>
+  </div>
 </div>
-<div style="text-align: center;">
-  <small *ngIf="emptyQuery" id="search-help" class="p-invalid">Please enter search term(s).</small>
-</div>
+
 

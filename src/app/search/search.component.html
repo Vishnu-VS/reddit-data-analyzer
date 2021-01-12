@@ -2,7 +2,7 @@
 <div style="padding-bottom: 50px;">
   <div class="start-padding-top">
     <p-card styleClass="filter-card">
-      <p-fieldset legend="Filters(0)" [toggleable]="true">
+      <p-fieldset legend="Filters (0)" [toggleable]="true">
         <div class="p-fluid p-formgrid p-grid">
           <div class="form-item p-field p-col">
             <span class="p-float-label">
@@ -15,7 +15,7 @@
         <div class="p-fluid p-formgrid p-grid">
           <div class="form-item p-field p-col" style="margin-bottom: 30px;">
             <p style="margin-top:0; margin-bottom: 15px; text-align: center;font-weight: 400;
-            font-size: 12px;
+            font-size: 1rem;
             color: rgba(255, 255, 255, 0.6);">Number of results: {{size}}</p>
             <p-slider [(ngModel)]="size"></p-slider>
           </div>
@@ -67,39 +67,37 @@
 
   <p-tabView *ngIf="responseRecieved">
     <p-tabPanel header="Pretty" [selected]="true">
-      <h4>Search Results for "{{searchResultTerm}}"</h4>
+      <p>Search Results for "{{searchResultTerm}}"</p>
        <div *ngIf="comments">
          <div class="submission-margins" *ngFor="let comment of comments">
-          <p-card>
-            <p style="margin-bottom: 5px;margin-top: 0;"><a [href]="comment.authorUrl" class="url-class" style="text-decoration: none;">{{comment.author}}</a>&nbsp;&nbsp;<a [href]="comment.subredditUrl" class="url-class">{{comment.subreddit}}</a>&nbsp;&nbsp;{{comment.score}} point {{comment.created_utc | date:'long'}}</p>
-            <p style="word-break: break-word; white-space: pre-line;">{{comment.body}}</p>
-            <small>Permalink: <a [href]="comment.permalinkUrl" class="url-class">{{comment.permalink}}</a></small>
+          <p-card styleClass="content-cards">
+            <p style="margin-bottom: 5px;margin-top: 0; font-family: 'Barlow Semi Condensed', sans-serif; font-size: 1.1rem;"><a [href]="comment.authorUrl" class="url-class" style="text-decoration: none;">{{comment.author}}</a>&nbsp;&nbsp;<a [href]="comment.subredditUrl" class="url-class">{{comment.subreddit}}</a>&nbsp;&nbsp;{{comment.score}} point {{comment.created_utc | date:'long'}}</p>
+            <p style="word-break: break-word; white-space: pre-line; font-family: 'Barlow Semi Condensed', sans-serif; font-size: 1.1rem;">{{comment.body}}</p>
+            <small style="font-family: 'Barlow Semi Condensed', sans-serif;">Permalink: <a [href]="comment.permalinkUrl" class="url-class">{{comment.permalink}}</a></small>
           </p-card>
          </div>
        </div>
        <div *ngIf="endpoint.includes('submission')">
         <div class="submission-margins" *ngFor="let submission of submissions">
-          <p-card>
+          <p-card styleClass="content-cards">
             <div class="submissions-container">
               <div style="margin-right: 20px;" *ngIf="submission.previewUrl">
-                <img [src]="submission.previewUrl" style="width: 216px;">
+                <img [src]="submission.previewUrl" style="width: 216px; border-radius: 6px;">
               </div>
               <div>
-                <p style="margin-bottom: 5px;margin-top: 0;"><a [href]="submission.authorUrl" class="url-class" style="text-decoration: none;">{{submission.author}}</a>&nbsp;&nbsp;<a [href]="submission.subredditUrl" class="url-class">{{submission.subreddit}}</a>&nbsp;&nbsp;{{submission.score}} points {{submission.created_utc | date:'long'}}</p>
-                <h3 style="margin-bottom: 5px;margin-top: 5px;word-break: break-word;white-space: pre-line;"><a [href]="submission.permalinkUrl" class="url-class-ellipsis" style="text-decoration: none;">{{submission.title}}</a></h3>
+                <p style="margin-bottom: 5px;margin-top: 0;font-size: 1.1rem;"><a [href]="submission.authorUrl" class="url-class" style="text-decoration: none;">{{submission.author}}</a>&nbsp;&nbsp;<a [href]="submission.subredditUrl" class="url-class">{{submission.subreddit}}</a>&nbsp;&nbsp;{{submission.score}} points {{submission.created_utc | date:'long'}}</p>
+                <h3 style="margin-bottom: 5px;margin-top: 5px;word-break: break-word;white-space: pre-line;font-size: 1.5rem;font-weight: 500;"><a [href]="submission.permalinkUrl" class="url-class-ellipsis" style="text-decoration: none;">{{submission.title}}</a></h3>
                 <small class="ellipsis-text"><a [href]="submission.url" class="url-class-ellipsis" target="_blank">{{submission.url}}</a></small>
               </div>
             </div>
-
-
           </p-card>
          </div>
        </div>
-       <div *ngIf="noResults">No results found</div>
+       <div *ngIf="noResults"><p>No results found</p></div>
     </p-tabPanel>
     <p-tabPanel header="Raw">
       <div style="margin-bottom: 20px" *ngIf="generatedUrl">
-        <p-card>
+        <p-card styleClass="content-cards">
           <a [href]="generatedUrl" class="url-class">{{generatedUrl}}</a>
         </p-card>
       </div>
