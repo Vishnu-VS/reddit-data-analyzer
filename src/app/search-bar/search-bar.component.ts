@@ -12,18 +12,24 @@ export class SearchBarComponent implements OnInit {
   endpoints: Endpoint[];
   selectedEndpoint: Endpoint;
   q: String;
+
   emptyQuery = false;
+
 
   constructor(private router: Router, private searchEvent: SearchService) {
     this.endpoints = [
-      { name: 'Comments', urlSegment: 'comment' },
-      { name: 'Posts', urlSegment: 'submission' },
-      { name: 'Subreddit', urlSegment: 'subreddit' },
+      { name: 'Comments', urlSegment: 'comment', inactive: false },
+      { name: 'Posts', urlSegment: 'submission', inactive: false },
+      { name: 'Subreddit', urlSegment: 'subreddit', inactive: true },
     ];
     this.selectedEndpoint = this.endpoints[1];
   }
 
-  ngOnInit(): void {}
+
+
+  ngOnInit(): void {
+
+  }
 
   endpointChange(event: any) {
     // console.log(event);

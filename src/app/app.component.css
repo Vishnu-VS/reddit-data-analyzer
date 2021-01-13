@@ -25,7 +25,7 @@
   top: 0;
   z-index: 100;
   width: 100vw;
-  display: none;
+  /* display: none; */
 }
 
 :host ::ng-deep p-toolbar .p-toolbar {

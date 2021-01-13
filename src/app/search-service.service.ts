@@ -8,6 +8,7 @@ import { SearchQuery } from './search-bar/search-query';
 export class SearchService {
 
   searchEvent: Subject<SearchQuery> = new Subject();
+  loading: Subject<boolean> = new Subject();
 
   constructor() { }
 }

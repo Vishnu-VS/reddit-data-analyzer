@@ -1,5 +1,5 @@
 <div class="p-inputgroup" style="position: relative;">
-  <p-dropdown id="endPoint" [options]="endpoints" [(ngModel)]="selectedEndpoint" optionLabel="name" (onChange)="endpointChange($event)"></p-dropdown>
+  <p-dropdown id="endPoint" [options]="endpoints" [(ngModel)]="selectedEndpoint" optionLabel="name" optionDisabled="inactive" (onChange)="endpointChange($event)"></p-dropdown>
   <input type="text" pInputText placeholder="Search" [(ngModel)]="q" [ngClass]="{'p-invalid': emptyQuery}" (ngModelChange)="qsearchQueryChange($event)" aria-describedby="search-help"/>
   <button
     pTooltip="Search all of reddit"

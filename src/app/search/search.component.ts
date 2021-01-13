@@ -228,12 +228,14 @@ export class SearchComponent implements OnInit, OnDestroy {
     if (this.after) {
       this.queryParameters.after = this.after;
     }
+    this.searchService.loading.next(true);
     this.http
       .get('https://api.pushshift.io/reddit/' + this.endpoint + '/search', {
         params: this.queryParameters,
         observe: 'response',
       })
       .subscribe((res) => {
+        this.searchService.loading.next(false);
         // debugger;
         // this.endpoint = this.selectedEndpoint;
         this.searchResultTerm = this.queryParameters.q;
@@ -308,6 +310,7 @@ export class SearchComponent implements OnInit, OnDestroy {
         this.responseRecieved = true;
       },
       (err) => {
+        this.searchService.loading.next(false);
         console.log(err);
         this.messageService.add({severity:'error', summary: "Unkown Error Occurred", detail: "Please try again later"});
       });
